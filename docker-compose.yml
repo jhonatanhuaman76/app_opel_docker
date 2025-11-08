@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: db_opel
+      MYSQL_USER: opel
+      MYSQL_PASSWORD: opel
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-init-opel:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 10
+      timeout: 3s
+
+  db-init:
+    image: busybox:latest
+    command: >
+      sh -c "
+      rm -f /init/script_opel.sql &&
+      wget -O /init/script_opel.sql https://raw.githubusercontent.com/jhonatanhuaman76/app_opel_docker/script_opel.sql
+      "
+    volumes:
+      - db-init-opel:/init
+    restart: "no"
+
+  backend:
+    image: jhonatan76/backend_opel:latest
+    ports:
+      - "8082:8080"
+    environment:
+      DATASOURCE_URL: jdbc:mysql://db:3306/db_opel
+      DATASOURCE_USERNAME: root
+      DATASOURCE_PASSWORD: mysql
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/categorias"]
+      interval: 10s
+      retries: 5
+      timeout: 3s
+
+  frontend:
+    image: jhonatan76/frontend_opel:latest
+    ports:
+      - "8081:8080"
+    environment:
+      API_URL: http://backend:8080/api
+    depends_on:
+      backend:
+        condition: service_started
+
+volumes:
+  db-init-opel:
