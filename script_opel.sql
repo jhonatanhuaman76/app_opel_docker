@@ -97,7 +97,7 @@ CREATE TABLE tbl_orden_confeccion_detalle (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO tbl_categoria (codigo, nombre, descripcion) VALUES
-('CAT-001', 'Pantalones Jean W', 'Pantalones jean producidos en Gamarra con diferentes cortes y tallas'),
+('CAT-001', 'Pantalones Jean', 'Pantalones jean producidos en Gamarra con diferentes cortes y tallas'),
 ('CAT-002', 'Polos Basicos', 'Polos de algodon en colores neutros y variados, ideales para uso diario'),
 ('CAT-003', 'Casacas de Invierno', 'Casacas acolchadas y cortavientos para clima frio, disponibles en varias tallas'),
 ('CAT-004', 'Camisas Formales', 'Camisas para oficina y eventos formales, en telas de alta calidad'),
