@@ -14,5 +14,5 @@ curl -L -o docker-compose.yml https://raw.githubusercontent.com/jhonatanhuaman76
 
 ### 🌐 Acceder a los recursos en local
 
-* **Frontend:** [http://localhost:8081](http://localhost:8081)
+* **Frontend:** [http://localhost:8081/categorias](http://localhost:8081/categorias)
 * **Backend API:** [http://localhost:8082/api/categorias](http://localhost:8082/api/categorias)
