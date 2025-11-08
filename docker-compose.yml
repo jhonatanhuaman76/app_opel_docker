@@ -24,7 +24,7 @@ services:
     command: >
       sh -c "
       rm -f /init/script_opel.sql &&
-      wget -O /init/script_opel.sql https://raw.githubusercontent.com/jhonatanhuaman76/app_opel_docker/script_opel.sql
+      wget -O /init/script_opel.sql https://raw.githubusercontent.com/jhonatanhuaman76/app_opel_docker/main/script_opel.sql
       "
     volumes:
       - db-init-opel:/init
